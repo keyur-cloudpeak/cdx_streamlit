@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CDX — Commercial Signal Intelligence Engine</title>
+<script>
+  // Apply saved theme before first paint to prevent flash
+  (function() {
+    var theme = localStorage.getItem('cdx-theme');
+    if (!theme) theme = 'dark';
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+{{STYLE_CSS}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  // Config injected from Python (config/agent1.py ... agent4.py, settings.py)
+  window.__CDX_CONFIG__ = {{CDX_CONFIG_JSON}};
+</script>
+<script>
+{{APP_JS}}
+</script>
+</body>
+</html>
