@@ -10,7 +10,7 @@
    ---------------------------------------------------------------------- */
 const CDX_CONFIG = (typeof window !== 'undefined' && window.__CDX_CONFIG__) || {};
 
-const BASE_URL = CDX_CONFIG.BASE_URL || 'https://cdx-lovat.vercel.app';
+const BASE_URL = CDX_CONFIG.BASE_URL || 'https://cdx-one.vercel.app';
 
 const AGENTS = CDX_CONFIG.AGENTS;
 
@@ -20,15 +20,15 @@ const PROVIDER_COLORS = CDX_CONFIG.PROVIDER_COLORS;
 
 /* ---------- API ---------- */
 const api = {
-  getSummary:        () => fetch(`${BASE_URL}/api/summary`).then(r => r.json()),
-  getModels:         () => fetch(`${BASE_URL}/api/models`).then(r => r.json()),
-  getAgent1:         () => fetch(`${BASE_URL}/api/agent1`).then(r => r.json()),
-  getAgent2:         () => fetch(`${BASE_URL}/api/agent2`).then(r => r.json()),
-  getAgent3:         () => fetch(`${BASE_URL}/api/agent3`).then(r => r.json()),
-  getAgent4:         () => fetch(`${BASE_URL}/api/agent4`).then(r => r.json()),
-  getRoiScenarios:   () => fetch(`${BASE_URL}/api/roi_scenarios`).then(r => r.json()),
+  getSummary: () => fetch(`${BASE_URL}/api/summary`).then(r => r.json()),
+  getModels: () => fetch(`${BASE_URL}/api/models`).then(r => r.json()),
+  getAgent1: () => fetch(`${BASE_URL}/api/agent1`).then(r => r.json()),
+  getAgent2: () => fetch(`${BASE_URL}/api/agent2`).then(r => r.json()),
+  getAgent3: () => fetch(`${BASE_URL}/api/agent3`).then(r => r.json()),
+  getAgent4: () => fetch(`${BASE_URL}/api/agent4`).then(r => r.json()),
+  getRoiScenarios: () => fetch(`${BASE_URL}/api/roi_scenarios`).then(r => r.json()),
   getPipelineStatus: () => fetch(`${BASE_URL}/api/pipeline_status`).then(r => r.json()),
-  runPipeline:       () => fetch(`${BASE_URL}/api/run_pipeline`, { method: 'POST' }).then(r => r.json()),
+  runPipeline: () => fetch(`${BASE_URL}/api/run_pipeline`, { method: 'POST' }).then(r => r.json()),
   clearChat: (sessionId) =>
     fetch(`${BASE_URL}/api/chat/clear?session_id=${sessionId}`).then(r => r.json()),
   sendChat: (agentKey, payload) =>
@@ -102,20 +102,20 @@ function hexToRgba(hex, alpha) {
 
 /* ---------- icon svgs (subset of lucide, hand-drawn to avoid deps) ---------- */
 const Icon = {
-  sun: (s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
-  moon: (s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
-  chevronRight: (s=14) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
-  chevronDown: (s=12) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
-  alertTriangle: (s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-  messageSquare: (s=16) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
-  trendingUp: (s=32) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
-  trash: (s=13) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
+  sun: (s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+  moon: (s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  chevronRight: (s = 14) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`,
+  chevronDown: (s = 12) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`,
+  alertTriangle: (s = 18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+  messageSquare: (s = 16) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  trendingUp: (s = 32) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
+  trash: (s = 13) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
 };
 
 function agentBadgeHtml(id, color, size = 'sm') {
   const px = { sm: 20, md: 28, lg: 40 }[size] || 20;
   const fontSize = size === 'lg' ? 14 : size === 'md' ? 11 : 9;
-  return `<div class="agent-badge" style="width:${px}px;height:${px}px;background-color:${hexToRgba(color,0.15)};border-top:2px solid ${hexToRgba(color,0.7)};color:${color};font-size:${fontSize}px;">${String(id).padStart(2,'0')}</div>`;
+  return `<div class="agent-badge" style="width:${px}px;height:${px}px;background-color:${hexToRgba(color, 0.15)};border-top:2px solid ${hexToRgba(color, 0.7)};color:${color};font-size:${fontSize}px;">${String(id).padStart(2, '0')}</div>`;
 }
 
 /* ==========================================================================
@@ -138,9 +138,9 @@ function svgHBarChart(data, opts = {}) {
     const y = topPad + i * (barH + gap);
     const bw = Math.max(2, (d.value / maxVal) * plotW);
     rows += `
-      <text x="${leftPad - 8}" y="${y + barH/2 + 4}" text-anchor="end" font-size="11" fill="var(--text-secondary)" font-family="DM Sans, sans-serif">${esc(d.label)}</text>
+      <text x="${leftPad - 8}" y="${y + barH / 2 + 4}" text-anchor="end" font-size="11" fill="var(--text-secondary)" font-family="DM Sans, sans-serif">${esc(d.label)}</text>
       <rect x="${leftPad}" y="${y}" width="${bw}" height="${barH}" rx="1" fill="${d.color}"></rect>
-      <text x="${leftPad + bw + 6}" y="${y + barH/2 + 4}" font-size="10" fill="var(--text-secondary)" font-family="JetBrains Mono, monospace">${d.valueLabel !== undefined ? d.valueLabel : d.value}</text>
+      <text x="${leftPad + bw + 6}" y="${y + barH / 2 + 4}" font-size="10" fill="var(--text-secondary)" font-family="JetBrains Mono, monospace">${d.valueLabel !== undefined ? d.valueLabel : d.value}</text>
     `;
   });
 
@@ -179,14 +179,14 @@ function svgDonutChart(data, opts = {}) {
   return `
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:center;">
       <svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="max-width:100%;">${paths}</svg>
-      <div style="display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;max-width:${size+60}px;">${legend}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;max-width:${size + 60}px;">${legend}</div>
     </div>`;
 }
 
 // Multi-line chart. series: [{key, label, color, dashed, values:[..]}], categories: [labels]
 function svgLineChart(series, categories, opts = {}) {
   // Ensure enough horizontal space for all points, allowing scrolling if needed
-  const w = Math.max(opts.width || 640, categories.length * 28 + 52); 
+  const w = Math.max(opts.width || 640, categories.length * 28 + 52);
   const h = opts.height || 200;
   const padL = 36, padR = 16, padT = 12, padB = 70; // Increased padding for rotated labels
   const plotW = w - padL - padR, plotH = h - padT - padB;
@@ -203,7 +203,7 @@ function svgLineChart(series, categories, opts = {}) {
   let grid = '';
   for (let g = 0; g <= 4; g++) {
     const gy = padT + (plotH / 4) * g;
-    grid += `<line x1="${padL}" y1="${gy}" x2="${padL+plotW}" y2="${gy}" stroke="var(--border-color)" stroke-dasharray="2 4"></line>`;
+    grid += `<line x1="${padL}" y1="${gy}" x2="${padL + plotW}" y2="${gy}" stroke="var(--border-color)" stroke-dasharray="2 4"></line>`;
   }
 
   // Rotate labels -45 deg to prevent overlap on dense charts
@@ -254,10 +254,10 @@ const State = {
 
 const PIPELINE_STAGES = [
   { key: 'starting', label: 'Starting Pipeline...', match: 'Starting Pipeline...' },
-  { key: 'data',     label: 'Generating Data...', match: 'Generating Data' },
-  { key: 'scores',   label: 'Calculating Scores...', match: 'Calculating Scores' },
-  { key: 'agents',   label: 'Running Agents...', match: 'Running Agents' },
-  { key: 'done',     label: 'Pipeline complete ✓', match: 'complete' },
+  { key: 'data', label: 'Generating Data...', match: 'Generating Data' },
+  { key: 'scores', label: 'Calculating Scores...', match: 'Calculating Scores' },
+  { key: 'agents', label: 'Running Agents...', match: 'Running Agents' },
+  { key: 'done', label: 'Pipeline complete ✓', match: 'complete' },
 ];
 
 /* ---------- theme ---------- */
@@ -473,7 +473,7 @@ function runPipeline(onUpdate) {
   State.pipeline.stageIndex = 0;
   State.pipeline.status = 'Starting Pipeline...';
   onUpdate();
-  api.runPipeline().catch(() => {});
+  api.runPipeline().catch(() => { });
   pollPipelineStatus(onUpdate);
 }
 function pollPipelineStatus(onUpdate) {
@@ -482,12 +482,12 @@ function pollPipelineStatus(onUpdate) {
     api.getPipelineStatus().then(status => {
       State.pipeline.status = status.status || 'idle';
       State.pipeline.lastRun = status.timestamp || status.last_run || State.pipeline.lastRun;
-      
+
       const matchIdx = PIPELINE_STAGES.findIndex(s => State.pipeline.status.includes(s.match));
       if (matchIdx >= 0) {
         State.pipeline.stageIndex = matchIdx;
       }
-      
+
       const isDone = State.pipeline.status === 'complete' || State.pipeline.status.toLowerCase().includes('error');
       if (isDone && State.pipeline.isRunning) {
         State.pipeline.isRunning = false;
@@ -495,7 +495,7 @@ function pollPipelineStatus(onUpdate) {
         invalidateAll();
       }
       onUpdate();
-    }).catch(() => {});
+    }).catch(() => { });
   };
   tick();
   if (State.pipeline.isRunning) {
@@ -508,10 +508,10 @@ function pollPipelineStatus(onUpdate) {
 
 const BRAND_BARS = [
   { key: 'Beverage', label: 'BEVERAGE', color: '#1D9E75' },
-  { key: 'Fashion',  label: 'FASHION',  color: '#8B7FE8' },
-  { key: 'Tech',     label: 'TECH',     color: '#4A9EE8' },
-  { key: 'Sport',    label: 'SPORT',    color: '#D4924A' },
-  { key: 'Finance',  label: 'FINANCE',  color: '#D4A017' },
+  { key: 'Fashion', label: 'FASHION', color: '#8B7FE8' },
+  { key: 'Tech', label: 'TECH', color: '#4A9EE8' },
+  { key: 'Sport', label: 'SPORT', color: '#D4924A' },
+  { key: 'Finance', label: 'FINANCE', color: '#D4A017' },
 ];
 
 function kpiCardHtml({ label, value, delta, deltaPositive, accentColor = '#CC1B1B', watermarkChar, loading = false }) {
@@ -601,8 +601,8 @@ function mountOverviewPanel(container) {
 function overviewLoadingSkeleton() {
   return `
     <div class="card" style="height:220px;"></div>
-    <div class="grid-4 agent-cards">${[1,2,3,4].map(() => `<div class="card" style="height:80px;"></div>`).join('')}</div>
-    <div class="grid-4">${[1,2,3,4].map(() => `<div class="card" style="height:100px;"></div>`).join('')}</div>
+    <div class="grid-4 agent-cards">${[1, 2, 3, 4].map(() => `<div class="card" style="height:80px;"></div>`).join('')}</div>
+    <div class="grid-4">${[1, 2, 3, 4].map(() => `<div class="card" style="height:100px;"></div>`).join('')}</div>
   `;
 }
 
@@ -684,11 +684,11 @@ function renderOverviewContent(agent1Data, agent2Data, agent3Data, agent4Data) {
       <span class="label">TOP OPPORTUNITIES THIS WEEK</span>
       <h2 class="section-title">Artist Leaderboard</h2>
       ${top5.length === 0
-        ? `<div class="card" style="text-align:center;padding:32px;color:var(--text-muted);font-size:14px;">No pipeline data yet. Run the pipeline to populate results.</div>`
-        : `<div class="card flat">
+      ? `<div class="card" style="text-align:center;padding:32px;color:var(--text-muted);font-size:14px;">No pipeline data yet. Run the pipeline to populate results.</div>`
+      : `<div class="card flat">
             <div class="lb-table-wrap">
               <table class="data-table" style="min-width:560px;">
-                <thead><tr>${['#','ARTIST','TERRITORY','MOMENTUM','OPPORTUNITY','BASE ROI',''].map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                <thead><tr>${['#', 'ARTIST', 'TERRITORY', 'MOMENTUM', 'OPPORTUNITY', 'BASE ROI', ''].map(h => `<th>${h}</th>`).join('')}</tr></thead>
                 <tbody>${top5.map((a, i) => leaderboardRowHtml(i + 1, a, agent4Data)).join('')}</tbody>
               </table>
             </div>
@@ -756,7 +756,7 @@ function bindOverviewEvents(agent1Data) {
       });
     });
   }
-  
+
   // Bind events for the ALL ARTISTS table on the overview
   if (agent1Data && agent1Data.length > 0) {
     bindAgent1Events(agent1Data);
@@ -787,9 +787,9 @@ function panelHeaderHtml(agent, description) {
 function skeletonPanelHtml() {
   return `
     <div style="padding:24px;display:flex;flex-direction:column;gap:24px;height:100%;overflow:hidden;">
-      <div class="grid-4">${[1,2,3,4].map(() => `<div class="card" style="height:70px;"><div class="skel" style="height:12px;width:60px;margin-bottom:8px;"></div><div class="skel" style="height:34px;width:80px;"></div></div>`).join('')}</div>
+      <div class="grid-4">${[1, 2, 3, 4].map(() => `<div class="card" style="height:70px;"><div class="skel" style="height:12px;width:60px;margin-bottom:8px;"></div><div class="skel" style="height:34px;width:80px;"></div></div>`).join('')}</div>
       <div class="grid-3">
-        ${[1,2,3].map(() => `<div class="card" style="height:220px;"><div class="skel" style="height:12px;width:96px;margin-bottom:12px;"></div><div class="skel" style="height:160px;width:100%;"></div></div>`).join('')}
+        ${[1, 2, 3].map(() => `<div class="card" style="height:220px;"><div class="skel" style="height:12px;width:96px;margin-bottom:12px;"></div><div class="skel" style="height:160px;width:100%;"></div></div>`).join('')}
       </div>
     </div>`;
 }
@@ -833,7 +833,7 @@ function renderAgent1(container, agent, data) {
       actionLabel: 'Run Pipeline', actionId: 'agent1-run-pipeline-btn',
     })}</div>`;
     const btn = document.getElementById('agent1-run-pipeline-btn');
-    if (btn) btn.addEventListener('click', () => { api.runPipeline().catch(() => {}); });
+    if (btn) btn.addEventListener('click', () => { api.runPipeline().catch(() => { }); });
     return;
   }
 
@@ -926,8 +926,8 @@ function artistTableHtml(data, maxMomentum) {
             <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">${esc(artist.rank)}</span>
             <span style="font-family:var(--font-display);font-weight:700;font-size:14px;" class="truncate">${esc(artist.artist_name)}</span>
             <span style="font-size:12px;color:var(--text-secondary);">${esc(artist.top_territory_1 || '')}</span>
-            <div class="score-bar-cell"><div class="score-bar-track"><div class="score-bar-fill" style="width:${Math.min((momentum/maxMomentum)*100,100)}%;background:${scoreBarColor(momentum)};"></div></div><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);width:32px;text-align:right;">${momentum.toFixed(1)}</span></div>
-            <div class="score-bar-cell"><div class="score-bar-track"><div class="score-bar-fill" style="width:${Math.min(crossPlat,100)}%;background:${scoreBarColor(crossPlat)};"></div></div><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);width:32px;text-align:right;">${crossPlat.toFixed(1)}</span></div>
+            <div class="score-bar-cell"><div class="score-bar-track"><div class="score-bar-fill" style="width:${Math.min((momentum / maxMomentum) * 100, 100)}%;background:${scoreBarColor(momentum)};"></div></div><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);width:32px;text-align:right;">${momentum.toFixed(1)}</span></div>
+            <div class="score-bar-cell"><div class="score-bar-track"><div class="score-bar-fill" style="width:${Math.min(crossPlat, 100)}%;background:${scoreBarColor(crossPlat)};"></div></div><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);width:32px;text-align:right;">${crossPlat.toFixed(1)}</span></div>
             <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);">${Number(artist.risk_flag_score).toFixed(1)}</span>
             <div><span class="badge ${badgeMap[artist.opportunity_class] || 'badge-muted'}">${esc(artist.opportunity_class)}</span></div>
             <span style="font-size:11px;color:var(--text-muted);">${esc(artist.top_territory_2 || '—')}</span>
@@ -943,7 +943,7 @@ function artistTableHtml(data, maxMomentum) {
       <div style="padding:12px 16px;border-bottom:1px solid var(--hairline);"><span class="label">ALL ARTISTS — DISCOVERY TABLE</span></div>
       <div style="overflow-x:auto;">
         <div class="discovery-row-grid discovery-head" style="min-width:720px;">
-          ${['#','ARTIST','TERR','MOMENTUM','CROSS-PLAT','RISK','OPPORTUNITY','TERR 2',''].map(h => `<span class="label">${h}</span>`).join('')}
+          ${['#', 'ARTIST', 'TERR', 'MOMENTUM', 'CROSS-PLAT', 'RISK', 'OPPORTUNITY', 'TERR 2', ''].map(h => `<span class="label">${h}</span>`).join('')}
         </div>
         <div style="min-width:720px;">${rows}</div>
       </div>
@@ -1022,13 +1022,13 @@ function messageBubbleHtml(message, accentColor) {
   const providerColor = PROVIDER_COLORS[message.provider] || '#8A8A9A';
   return `
     <div class="msg-row assistant">
-      <div class="msg-badge" style="background-color:${hexToRgba(accentColor,0.1)};border-top-color:${hexToRgba(accentColor,0.7)};color:${accentColor};">CD</div>
-      <div class="msg-content" style="background-color:${hexToRgba(accentColor,0.06)};border-left-color:${accentColor};${message.isError ? 'color:rgba(204,27,27,0.8);' : ''}">
+      <div class="msg-badge" style="background-color:${hexToRgba(accentColor, 0.1)};border-top-color:${hexToRgba(accentColor, 0.7)};color:${accentColor};">CD</div>
+      <div class="msg-content" style="background-color:${hexToRgba(accentColor, 0.06)};border-left-color:${accentColor};${message.isError ? 'color:rgba(204,27,27,0.8);' : ''}">
         ${message.isError ? `<div class="msg-error-tag">${Icon.alertTriangle(12)}<span>Error</span></div>` : ''}
         <div class="msg-body">${renderMessageContentHtml(message.content)}</div>
         <div class="msg-meta">
           ${message.timestamp ? `<span class="msg-time">${fmtTime(message.timestamp)}</span>` : ''}
-          ${message.modelLabel ? `<span class="msg-model-tag" style="color:${providerColor};background-color:${hexToRgba(providerColor,0.15)};">${esc(shortModelLabel(message.modelLabel))}</span>` : ''}
+          ${message.modelLabel ? `<span class="msg-model-tag" style="color:${providerColor};background-color:${hexToRgba(providerColor, 0.15)};">${esc(shortModelLabel(message.modelLabel))}</span>` : ''}
         </div>
       </div>
     </div>`;
@@ -1037,10 +1037,10 @@ function messageBubbleHtml(message, accentColor) {
 function typingIndicatorHtml(modelLabel, accentColor) {
   return `
     <div class="typing-row">
-      <div class="msg-badge" style="background-color:${hexToRgba(accentColor,0.1)};border-top-color:${hexToRgba(accentColor,0.7)};color:${accentColor};">CD</div>
+      <div class="msg-badge" style="background-color:${hexToRgba(accentColor, 0.1)};border-top-color:${hexToRgba(accentColor, 0.7)};color:${accentColor};">CD</div>
       <div class="flex flex-col gap-1">
         <div class="typing-dots">
-          ${[0,1,2].map(i => `<span class="typing-dot" style="background:${accentColor};animation-delay:${i*0.2}s;"></span>`).join('')}
+          ${[0, 1, 2].map(i => `<span class="typing-dot" style="background:${accentColor};animation-delay:${i * 0.2}s;"></span>`).join('')}
         </div>
         ${modelLabel ? `<span class="typing-label">Thinking with ${esc(modelLabel)}...</span>` : ''}
       </div>
@@ -1058,10 +1058,10 @@ function modelSelectorHtml(agentKey, modelsData, selectedModelId, selectedProvid
 
   const tabs = providerIds.length > 1
     ? `<div class="provider-tabs">${providerIds.map(pid => {
-        const isActive = pid === activeProvider;
-        const color = PROVIDER_COLORS[pid] || accentColor;
-        return `<button class="provider-tab ${isActive ? 'active' : ''}" data-provider-tab="${esc(pid)}" style="background-color:${isActive ? color : 'var(--bg-surface2)'};">${esc((providers[pid] && providers[pid].label) || pid)}</button>`;
-      }).join('')}</div>`
+      const isActive = pid === activeProvider;
+      const color = PROVIDER_COLORS[pid] || accentColor;
+      return `<button class="provider-tab ${isActive ? 'active' : ''}" data-provider-tab="${esc(pid)}" style="background-color:${isActive ? color : 'var(--bg-surface2)'};">${esc((providers[pid] && providers[pid].label) || pid)}</button>`;
+    }).join('')}</div>`
     : '';
 
   const select = `
@@ -1146,14 +1146,14 @@ function createChatPanel(hostEl, opts) {
               <option value="">All artists</option>
               ${artistOptions.map(name => `<option value="${esc(name)}" ${state.artistFilter === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}
             </select>
-            ${state.artistFilter ? `<button class="artist-chip" id="artist-chip-clear-${agentKey}" style="background-color:${hexToRgba(accentColor,0.13)};color:${accentColor};">${esc(state.artistFilter)} ×</button>` : ''}
+            ${state.artistFilter ? `<button class="artist-chip" id="artist-chip-clear-${agentKey}" style="background-color:${hexToRgba(accentColor, 0.13)};color:${accentColor};">${esc(state.artistFilter)} ×</button>` : ''}
           </div>
         </div>
         <div class="chat-messages" id="chat-messages-${agentKey}"></div>
         <div class="chat-input-bar">
           <div class="chat-input-row">
             <textarea class="input chat-textarea" id="chat-textarea-${agentKey}" rows="1" placeholder="Ask ${esc(agentName)}${modelLabel ? ' (' + esc(modelLabel) + ')' : ''}…" ${state.isLoading ? 'disabled' : ''}></textarea>
-            <button class="btn-primary chat-send-btn" id="chat-send-${agentKey}" style="background-color:${state.isLoading ? hexToRgba(accentColor,0.25) : accentColor};cursor:${state.isLoading ? 'not-allowed':'pointer'};" ${state.isLoading ? 'disabled' : ''}>Send</button>
+            <button class="btn-primary chat-send-btn" id="chat-send-${agentKey}" style="background-color:${state.isLoading ? hexToRgba(accentColor, 0.25) : accentColor};cursor:${state.isLoading ? 'not-allowed' : 'pointer'};" ${state.isLoading ? 'disabled' : ''}>Send</button>
           </div>
         </div>
       </div>`;
@@ -1339,7 +1339,7 @@ function createChatPanel(hostEl, opts) {
   }
 
   function clearChat() {
-    if (state.sessionId) api.clearChat(state.sessionId).catch(() => {});
+    if (state.sessionId) api.clearChat(state.sessionId).catch(() => { });
     state.messages = [];
     state.sessionId = null;
     sessionStorage.removeItem(`cdx_session_${agentKey}`);
@@ -1353,7 +1353,7 @@ function createChatPanel(hostEl, opts) {
     state.modelsData = modelsData;
     selectDefaultModel();
     refreshModelSelector();
-  }).catch(() => {});
+  }).catch(() => { });
 
   renderShell();
 
@@ -1408,13 +1408,13 @@ function renderAgent2Analytics(container, data, artistFocus, onAskAgent) {
   const matrixRows = data.map(artist => {
     const isHl = artistFocus === artist.artist_name;
     return `
-      <tr style="${isHl ? `background-color:${hexToRgba(AGENT2_COLOR,0.06)};box-shadow:inset 2px 0 0 ${AGENT2_COLOR};` : ''}">
+      <tr style="${isHl ? `background-color:${hexToRgba(AGENT2_COLOR, 0.06)};box-shadow:inset 2px 0 0 ${AGENT2_COLOR};` : ''}">
         <td style="font-family:var(--font-display);font-weight:700;white-space:nowrap;">${esc(artist.artist_name)}</td>
         ${BRAND_CATEGORIES_A2.map(cat => {
-          const isActive = artist.best_brand_category === cat;
-          const score = isActive ? Number(artist.brand_fit_score) : 0;
-          return `<td><span class="matrix-cell" style="${matrixCellStyle(score, isActive)}">${isActive ? score.toFixed(0) : '—'}</span></td>`;
-        }).join('')}
+      const isActive = artist.best_brand_category === cat;
+      const score = isActive ? Number(artist.brand_fit_score) : 0;
+      return `<td><span class="matrix-cell" style="${matrixCellStyle(score, isActive)}">${isActive ? score.toFixed(0) : '—'}</span></td>`;
+    }).join('')}
       </tr>`;
   }).join('');
 
@@ -1422,12 +1422,12 @@ function renderAgent2Analytics(container, data, artistFocus, onAskAgent) {
     const isHl = artistFocus === artist.artist_name;
     const pillars = [artist.activation_pillar_1, artist.activation_pillar_2, artist.activation_pillar_3].filter(Boolean);
     return `
-      <div class="card brief-card" data-artist-card="${esc(artist.artist_name)}" style="${isHl ? `border-color:${AGENT2_COLOR};box-shadow:0 0 0 1px ${hexToRgba(AGENT2_COLOR,0.4)};` : ''}">
+      <div class="card brief-card" data-artist-card="${esc(artist.artist_name)}" style="${isHl ? `border-color:${AGENT2_COLOR};box-shadow:0 0 0 1px ${hexToRgba(AGENT2_COLOR, 0.4)};` : ''}">
         <div class="flex items-start justify-between gap-3" style="margin-bottom:8px;">
           <div class="min-w-0">
             <div style="font-family:var(--font-display);font-weight:700;">${esc(artist.artist_name)}</div>
             <div class="flex wrap gap-1" style="margin-top:4px;">
-              <span class="badge" style="background-color:${hexToRgba(AGENT2_COLOR,0.13)};color:${AGENT2_COLOR};">${esc(artist.best_brand_category || '')}</span>
+              <span class="badge" style="background-color:${hexToRgba(AGENT2_COLOR, 0.13)};color:${AGENT2_COLOR};">${esc(artist.best_brand_category || '')}</span>
               <span class="badge badge-muted">${esc(artist.recommended_channel || '')}</span>
               ${sentimentBadgeHtml(artist.sentiment_risk)}
             </div>
@@ -1512,7 +1512,7 @@ function renderAgent3Analytics(container, data, artistFocus, onAskAgent) {
   const rows = data.map(artist => {
     const isHl = artistFocus === artist.artist_name;
     return `
-      <tr class="audience-row" data-artist-row="${esc(artist.artist_name)}" style="${isHl ? `background-color:${hexToRgba(AGENT3_COLOR,0.06)};box-shadow:inset 2px 0 0 ${AGENT3_COLOR};` : ''}">
+      <tr class="audience-row" data-artist-row="${esc(artist.artist_name)}" style="${isHl ? `background-color:${hexToRgba(AGENT3_COLOR, 0.06)};box-shadow:inset 2px 0 0 ${AGENT3_COLOR};` : ''}">
         <td style="font-family:var(--font-display);font-weight:700;">${esc(artist.artist_name)}</td>
         <td style="color:var(--text-secondary);">${esc(artist.primary_market || '—')}</td>
         <td style="color:var(--text-muted);">${esc(artist.secondary_market || '—')}</td>
@@ -1548,7 +1548,7 @@ function renderAgent3Analytics(container, data, artistFocus, onAskAgent) {
           <div style="padding:12px 16px;border-bottom:1px solid var(--hairline);"><span class="label">AUDIENCE PROFILES</span></div>
           <div style="overflow-x:auto;">
             <table class="data-table audience-table" style="min-width:680px;">
-              <thead><tr>${['ARTIST','PRIMARY MKT','SECONDARY','TOTAL REACH','PLATFORM','FIT SCORE','CONFIDENCE','PROXY %',''].map(h => `<th>${h}</th>`).join('')}</tr></thead>
+              <thead><tr>${['ARTIST', 'PRIMARY MKT', 'SECONDARY', 'TOTAL REACH', 'PLATFORM', 'FIT SCORE', 'CONFIDENCE', 'PROXY %', ''].map(h => `<th>${h}</th>`).join('')}</tr></thead>
               <tbody>${rows}</tbody>
             </table>
           </div>
@@ -1605,7 +1605,7 @@ function renderAgent4Analytics(container, data, artistFocus, onAskAgent) {
     const isHl = artistFocus === artist.artist_name;
     const assumptions = [artist.assumption_1, artist.assumption_2, artist.assumption_3].filter(Boolean);
     return `
-      <div class="card investment-card" data-artist-card="${esc(artist.artist_name)}" style="${isHl ? `border-color:${AGENT4_COLOR};box-shadow:0 0 0 1px ${hexToRgba(AGENT4_COLOR,0.4)};` : ''}">
+      <div class="card investment-card" data-artist-card="${esc(artist.artist_name)}" style="${isHl ? `border-color:${AGENT4_COLOR};box-shadow:0 0 0 1px ${hexToRgba(AGENT4_COLOR, 0.4)};` : ''}">
         <div class="flex items-start justify-between gap-3" style="margin-bottom:8px;">
           <div class="min-w-0">
             <div style="font-family:var(--font-display);font-weight:700;">${esc(artist.artist_name)}</div>
@@ -1667,7 +1667,7 @@ function renderAgent4Analytics(container, data, artistFocus, onAskAgent) {
   if (!scenarios) {
     queryData('roi_scenarios', api.getRoiScenarios, 60000).then(() => {
       if (State.activePanel === 'agent4') renderAgent4Analytics(container, data, artistFocus, onAskAgent);
-    }).catch(() => {});
+    }).catch(() => { });
   }
 }
 
@@ -1836,7 +1836,7 @@ function initApp() {
   queryData('summary', api.getSummary, 30000).then(summary => {
     State.summary = summary;
     updateWorkflowBanner();
-  }).catch(() => {});
+  }).catch(() => { });
 
   navigate('overview');
 }
