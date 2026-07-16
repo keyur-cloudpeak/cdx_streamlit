@@ -1,3 +1,8 @@
 streamlit>=1.32
 python-dotenv>=1.0
 sqlalchemy>=2.0
+pandas>=1.5
+requests>=2.31
+fastapi>=0.100
+uvicorn[standard]>=0.23
+python-multipart>=0.0.6
