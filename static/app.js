@@ -253,12 +253,11 @@ const State = {
 };
 
 const PIPELINE_STAGES = [
-  { key: 'scores', label: 'Generating scores...' },
-  { key: 'agent1', label: 'Running Agent 1 — Opportunity Discovery...' },
-  { key: 'agent2', label: 'Running Agent 2 — Strategy Synthesis...' },
-  { key: 'agent3', label: 'Running Agent 3 — Audience-Fit...' },
-  { key: 'agent4', label: 'Running Agent 4 — ROI Forecast...' },
-  { key: 'done',   label: 'Pipeline complete ✓' },
+  { key: 'starting', label: 'Starting Pipeline...', match: 'Starting Pipeline...' },
+  { key: 'data',     label: 'Generating Data...', match: 'Generating Data' },
+  { key: 'scores',   label: 'Calculating Scores...', match: 'Calculating Scores' },
+  { key: 'agents',   label: 'Running Agents...', match: 'Running Agents' },
+  { key: 'done',     label: 'Pipeline complete ✓', match: 'complete' },
 ];
 
 /* ---------- theme ---------- */
@@ -461,20 +460,20 @@ function renderErrorBoundary(container, err, retry) {
 
 /* ---------- pipeline control (shared by overview panel) ---------- */
 function pipelineCurrentLabel() {
-  return PIPELINE_STAGES[State.pipeline.stageIndex]?.label || '';
+  if (State.pipeline.status && State.pipeline.status.toLowerCase().includes('error')) {
+    return State.pipeline.status;
+  }
+  return PIPELINE_STAGES[State.pipeline.stageIndex]?.label || State.pipeline.status || '';
 }
 function pipelineProgress() {
-  return (State.pipeline.stageIndex / (PIPELINE_STAGES.length - 1)) * 100;
+  return (State.pipeline.stageIndex / Math.max(1, PIPELINE_STAGES.length - 1)) * 100;
 }
 function runPipeline(onUpdate) {
   State.pipeline.isRunning = true;
   State.pipeline.stageIndex = 0;
+  State.pipeline.status = 'Starting Pipeline...';
   onUpdate();
   api.runPipeline().catch(() => {});
-  State.pipeline.stageHandle = setInterval(() => {
-    State.pipeline.stageIndex = Math.min(State.pipeline.stageIndex + 1, PIPELINE_STAGES.length - 2);
-    onUpdate();
-  }, 8000);
   pollPipelineStatus(onUpdate);
 }
 function pollPipelineStatus(onUpdate) {
@@ -482,15 +481,20 @@ function pollPipelineStatus(onUpdate) {
   const tick = () => {
     api.getPipelineStatus().then(status => {
       State.pipeline.status = status.status || 'idle';
-      State.pipeline.lastRun = status.last_run || State.pipeline.lastRun;
-      if (status.status === 'complete' && State.pipeline.isRunning) {
+      State.pipeline.lastRun = status.timestamp || status.last_run || State.pipeline.lastRun;
+      
+      const matchIdx = PIPELINE_STAGES.findIndex(s => State.pipeline.status.includes(s.match));
+      if (matchIdx >= 0) {
+        State.pipeline.stageIndex = matchIdx;
+      }
+      
+      const isDone = State.pipeline.status === 'complete' || State.pipeline.status.toLowerCase().includes('error');
+      if (isDone && State.pipeline.isRunning) {
         State.pipeline.isRunning = false;
-        State.pipeline.stageIndex = PIPELINE_STAGES.length - 1;
-        clearInterval(State.pipeline.stageHandle);
         clearInterval(State.pipeline.pollHandle);
         invalidateAll();
-        onUpdate();
       }
+      onUpdate();
     }).catch(() => {});
   };
   tick();
@@ -628,14 +632,17 @@ function renderOverviewContent(agent1Data, agent2Data, agent3Data, agent4Data) {
     ? [...agent1Data].sort((a, b) => Number(b.momentum_score) - Number(a.momentum_score)).slice(0, 5)
     : [];
 
-  const dotStatus = State.pipeline.status === 'running' ? 'fresh' : (summary?.run_timestamp ? 'fresh' : 'idle');
-  const dotColor = { fresh: '#1D9E75', stale: '#D4924A', idle: '#4A4A5E' }[dotStatus];
+  const isError = State.pipeline.status && State.pipeline.status.toLowerCase().includes('error');
+  const dotStatus = State.pipeline.isRunning ? 'fresh' : (isError ? 'error' : (summary?.run_timestamp ? 'fresh' : 'idle'));
+  const dotColor = { fresh: '#1D9E75', stale: '#D4924A', idle: '#4A4A5E', error: '#CC1B1B' }[dotStatus];
 
-  const lastRunLabel = State.pipeline.lastRun
-    ? `Last run: ${fmtDate(State.pipeline.lastRun)}`
-    : summary?.run_timestamp
-      ? `Last run: ${fmtDate(summary.run_timestamp)}`
-      : 'Pipeline not run yet';
+  const lastRunLabel = isError
+    ? State.pipeline.status
+    : (State.pipeline.lastRun
+      ? `Last run: ${fmtDate(State.pipeline.lastRun)}`
+      : summary?.run_timestamp
+        ? `Last run: ${fmtDate(summary.run_timestamp)}`
+        : 'Pipeline not run yet');
 
   const inner = document.getElementById('overview-inner');
   inner.innerHTML = `
