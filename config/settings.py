@@ -35,6 +35,6 @@ PROVIDER_COLORS = {
 }
 
 # Page-level Streamlit config
-PAGE_TITLE = "CDX — Commercial Signal Intelligence Engine"
+PAGE_TITLE = "CSIE-Commercial Signal Intelligence Engine"
 PAGE_ICON = "🎯"
 IFRAME_HEIGHT = 1000  # px, tweak to taste / make responsive in app.py
