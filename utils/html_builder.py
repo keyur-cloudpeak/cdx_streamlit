@@ -26,11 +26,21 @@ def build_cdx_config_json() -> str:
     frontend reads as window.__CDX_CONFIG__."""
     from config import AGENTS, AGENT_SUGGESTIONS, BASE_URL, PROVIDER_COLORS
 
+    try:
+        import base64
+        cursor_path = STATIC_DIR / "Sony-Music-cursor.png"
+        with open(cursor_path, "rb") as f:
+            loader_b64 = base64.b64encode(f.read()).decode("utf-8")
+            loader_img_url = f"data:image/png;base64,{loader_b64}"
+    except Exception:
+        loader_img_url = ""
+
     config = {
         "BASE_URL": BASE_URL,
         "AGENTS": AGENTS,
         "AGENT_SUGGESTIONS": AGENT_SUGGESTIONS,
         "PROVIDER_COLORS": PROVIDER_COLORS,
+        "LOADER_IMG_URL": loader_img_url,
     }
     return json.dumps(config)
 

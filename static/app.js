@@ -279,15 +279,25 @@ function renderHeader() {
     ? `<div class="logo-wrap">${LOGO_SVG_MARKUP}</div>`
     : `<div class="logo-wrap"><div class="logo-fallback-icon">CD</div><span class="logo-fallback-text">Chromadata</span></div>`;
 
+  const loaderUrl = (window.__CDX_CONFIG__ && window.__CDX_CONFIG__.LOADER_IMG_URL) || "";
+
   return `
     <header class="app-header">
       ${logoHtml}
       <div class="flex items-center gap-4">
         <button id="theme-toggle-btn" class="btn-icon" title="Toggle theme">${getIsDark() ? Icon.sun(18) : Icon.moon(18)}</button>
         <div class="vdiv"></div>
-        <div class="presented-to">
-          <div class="label">Presented to</div>
-          <div class="brand-name">Sony Music Latin</div>
+        <div class="presented-to" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left;">
+          <div class="brand-name" style="display: flex; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 36" height="28" aria-label="Sony Music Latin" role="img">
+                <image href="${loaderUrl}" x="0" y="0" width="36" height="36" />
+                <g transform="translate(42, 0)">
+                    <text x="0" y="14.7" font-family="'DM Sans','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="0.08em" fill="var(--text-primary)">SONY MUSIC</text>
+                    <line x1="0" y1="18.7" x2="110" y2="18.7" stroke="var(--text-primary)" stroke-width="0.6" opacity="0.35"/>
+                    <text x="0" y="22.7" font-family="'DM Sans','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="500" letter-spacing="0.22em" fill="var(--text-secondary)" dominant-baseline="hanging">LATIN</text>
+                </g>
+            </svg>
+          </div>
         </div>
       </div>
     </header>`;
@@ -598,12 +608,48 @@ function mountOverviewPanel(container) {
   });
 }
 
-function overviewLoadingSkeleton() {
+function getLoaderHtml() {
+  const loaderUrl = (window.__CDX_CONFIG__ && window.__CDX_CONFIG__.LOADER_IMG_URL) || "";
   return `
-    <div class="card" style="height:220px;"></div>
-    <div class="grid-4 agent-cards">${[1, 2, 3, 4].map(() => `<div class="card" style="height:80px;"></div>`).join('')}</div>
-    <div class="grid-4">${[1, 2, 3, 4].map(() => `<div class="card" style="height:100px;"></div>`).join('')}</div>
+    <style>
+    .custom-loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f1115; /* Dark background matching theme */
+        z-index: 999999;
+    }
+    .zoom-logo {
+        animation: pulse-zoom 1.5s ease-in-out infinite;
+        width: 240px;
+        height: auto;
+    }
+    @keyframes pulse-zoom {
+        0% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.7; }
+    }
+    </style>
+    <div class="custom-loader-container">
+        <svg class="zoom-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 36" height="60" aria-label="Sony Music Latin" role="img">
+            <image href="${loaderUrl}" x="0" y="0" width="36" height="36" />
+            <g transform="translate(46, 0)">
+                <text x="0" y="14.7" font-family="'DM Sans','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="0.08em" fill="#FFFFFF">SONY MUSIC</text>
+                <line x1="0" y1="18.7" x2="120" y2="18.7" stroke="#FFFFFF" stroke-width="0.6" opacity="0.35"/>
+                <text x="0" y="22.7" font-family="'DM Sans','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="500" letter-spacing="0.22em" fill="#999999" dominant-baseline="hanging">LATIN</text>
+            </g>
+        </svg>
+    </div>
   `;
+}
+
+function overviewLoadingSkeleton() {
+  return getLoaderHtml();
 }
 
 function renderOverviewContent(agent1Data, agent2Data, agent3Data, agent4Data) {
@@ -785,13 +831,7 @@ function panelHeaderHtml(agent, description) {
 }
 
 function skeletonPanelHtml() {
-  return `
-    <div style="padding:24px;display:flex;flex-direction:column;gap:24px;height:100%;overflow:hidden;">
-      <div class="grid-4">${[1, 2, 3, 4].map(() => `<div class="card" style="height:70px;"><div class="skel" style="height:12px;width:60px;margin-bottom:8px;"></div><div class="skel" style="height:34px;width:80px;"></div></div>`).join('')}</div>
-      <div class="grid-3">
-        ${[1, 2, 3].map(() => `<div class="card" style="height:220px;"><div class="skel" style="height:12px;width:96px;margin-bottom:12px;"></div><div class="skel" style="height:160px;width:100%;"></div></div>`).join('')}
-      </div>
-    </div>`;
+  return getLoaderHtml();
 }
 
 function emptyStateHtml({ icon, title, message, actionLabel, actionId }) {
