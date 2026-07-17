@@ -1,6 +1,6 @@
-# CDX — Streamlit Edition
+# CSIE — Streamlit Edition
 
-Same CDX design and behavior as the original single-file `index.html`,
+Same CSIE design and behavior as the original single-file `index.html`,
 now served through a well-structured Streamlit project. The UI itself is
 rendered **unchanged** (same CSS, same JS, same charts/animations) inside
 Streamlit via an iframe (`streamlit.components.v1.html`) — nothing was
@@ -35,7 +35,7 @@ cdx_streamlit/
 1. `config/agent1.py` … `agent4.py` each define that agent's `AGENT` dict
    (id, key, name, subtitle, color, hasChat) and `SUGGESTIONS` (chat
    starter prompts). `config/settings.py` holds the shared `BASE_URL`
-   (the hosted CDX API the frontend talks to) and provider colors.
+   (the hosted CSIE API the frontend talks to) and provider colors.
 2. `config/__init__.py` assembles those into the exact shapes the
    frontend JS expects: `AGENTS`, `AGENT_SUGGESTIONS`, `BASE_URL`,
    `PROVIDER_COLORS`.

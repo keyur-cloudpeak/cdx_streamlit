@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CDX — core: constants, api, utils, icons, charts
+   CSIE — core: constants, api, utils, icons, charts
    ========================================================================== */
 
 /* ----------------------------------------------------------------------
@@ -241,7 +241,7 @@ function svgLineChart(series, categories, opts = {}) {
     </div>`;
 }
 /* ==========================================================================
-   CDX — app shell: state, header, workflow banner, navigation
+   CSIE — app shell: state, header, workflow banner, navigation
    ========================================================================== */
 
 const State = {
@@ -513,7 +513,7 @@ function pollPipelineStatus(onUpdate) {
   }
 }
 /* ==========================================================================
-   CDX — Overview panel
+   CSIE — Overview panel
    ========================================================================== */
 
 const BRAND_BARS = [
@@ -809,7 +809,7 @@ function bindOverviewEvents(agent1Data) {
   }
 }
 /* ==========================================================================
-   CDX — Agent 1: Opportunity Discovery panel
+   CSIE — Agent 1: Opportunity Discovery panel
    ========================================================================== */
 
 const TERRITORY_LABELS = {
@@ -1006,7 +1006,7 @@ function bindAgent1Events(data) {
   });
 }
 /* ==========================================================================
-   CDX — shared Chat panel (used inside Agent 2/3/4 panels)
+   CSIE — shared Chat panel (used inside Agent 2/3/4 panels)
    ========================================================================== */
 
 const CONTINUE_LINKS = {
@@ -1411,7 +1411,7 @@ function createChatPanel(hostEl, opts) {
   };
 }
 /* ==========================================================================
-   CDX — Agent 2/3/4 split panels (chat + analytics)
+   CSIE — Agent 2/3/4 split panels (chat + analytics)
    ========================================================================== */
 
 /* ---------- Agent 2: Strategy Synthesis analytics ---------- */
@@ -1837,7 +1837,7 @@ function mountAgentChatPanel(container, agentNum) {
   updateMobileTabsUi();
 }
 /* ==========================================================================
-   CDX — main bootstrap
+   CSIE — main bootstrap
    ========================================================================== */
 
 const ICON_SVG_MARKUP = `<svg width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">

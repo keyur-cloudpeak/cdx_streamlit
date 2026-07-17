@@ -1,7 +1,7 @@
 """
-Global settings for the CDX Streamlit app.
+Global settings for the CSIE Streamlit app.
 
-CDX is a client-side SPA that talks directly to a hosted backend API
+CSIE is a client-side SPA that talks directly to a hosted backend API
 (BASE_URL). Streamlit's job here is just to serve the exact same
 HTML/CSS/JS experience inside an iframe (via streamlit.components.v1.html)
 while keeping the Python side of the project cleanly organized.

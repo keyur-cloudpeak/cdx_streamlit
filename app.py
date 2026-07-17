@@ -1,7 +1,7 @@
 """
-app.py — CDX Streamlit entry point
+app.py — CSIE Streamlit entry point
 
-This app does NOT rebuild the CDX UI with native Streamlit widgets — the
+This app does NOT rebuild the CSIE UI with native Streamlit widgets — the
 design (layout, CSS, charts, chat panels, animations) is preserved exactly
 as-is by rendering the original HTML/CSS/JS bundle inside an iframe via
 streamlit.components.v1.html().
